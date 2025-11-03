@@ -156,13 +156,39 @@ body{
     <p>Our App Will Accurately Display Current Weather Conditions in No Time.</p>
   </div>
 
-  <div style="width:100%">
-    <div class="search-row" style="width:100%;display:flex;gap:8px;margin-top:12px">
-      <input id="city-input" placeholder="Enter your location" aria-label="City name" />
-      <button class="go" id="btn-search">Search</button>
-    </div>
-    <div id="status" class="centered muted" style="margin-top:10px;min-height:20px"></div>
+<div style="width:100%">
+  <div class="search-row" style="width:100%;display:flex;gap:8px;margin-top:12px">
+    <input id="city-input" placeholder="Enter Your Location" aria-label="City name" />
+    <button class="go" id="btn-search">Search</button>
   </div>
+  <div id="status" class="centered muted" style="margin-top:10px;min-height:20px"></div>
+</div>
+
+<style>
+  .search-row input {
+    flex: 1;
+    padding: 10px;
+    font-size: 15px;
+  }
+
+  .search-row button {
+    padding: 10px 16px;
+    font-size: 15px;
+    white-space: nowrap;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 480px) {
+    .search-row {
+      flex-direction: column; /* stack on mobile */
+    }
+
+    .search-row button {
+      width: 100%; /* full width button */
+    }
+  }
+</style>
+
 </div>
 
 
@@ -174,7 +200,7 @@ body{
 </div>
 
 <footer class="footer">
-  <p>© 2025 Daily Weather. All Rights Reserved.</p>
+  <p>© 2025 <strong>Daily Weather</strong> | All Rights Reserved.</p>
 </footer>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -262,7 +288,11 @@ async function fetchByCity(city){
    renderMain(data);
    fetchForecast(data.coord.lat,data.coord.lon);
    setStatus('');
- }catch(err){console.error(err);setStatus('Could not load weather: '+(err.message||err),true);}
+ }catch (err) {
+  console.error(err);
+  setStatus('Location Not Found. Please try Again.', true);
+}
+
 }
 const map=L.map('map',{zoomControl:true}).setView([0,0],2);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
@@ -280,7 +310,7 @@ function resizeMap(){
 window.addEventListener('resize',resizeMap);
 document.getElementById('btn-search').addEventListener('click',()=>{
  const city=document.getElementById('city-input').value.trim();
- if(!city){setStatus('Please type a city name',true);return;}
+ if(!city){setStatus('Please Type a City Name',true);return;}
  fetchByCity(city);
 });
 document.getElementById('city-input').addEventListener('keydown',e=>{
