@@ -1,0 +1,14 @@
+# Prevent sensitive files from being pushed
+config.js
+.env
+
+# Node (future)
+node_modules/
+    
+# VS Code settings
+.vscode/
+
+# System files
+desktop.ini
+.DS_Store
+Thumbs.db

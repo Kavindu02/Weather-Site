@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Daily Weather — Forecast Version</title>
+<title>Daily Weather Forecast</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -178,8 +178,8 @@ body{
 </footer>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="config.js"></script>
 <script>
-const API_KEY='27314f3f4b9d3fc54eb97c5029488b42';
 const statusEl=document.getElementById('status');
 function setStatus(msg,isError=false){statusEl.textContent=msg||'';statusEl.style.color=isError?'#ffb4b4':'';}
 function capitalize(s){return s?s.split(' ').map(p=>p.charAt(0).toUpperCase()+p.slice(1)).join(' '):'';}
